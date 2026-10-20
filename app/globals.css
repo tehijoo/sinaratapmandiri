@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+/*
+ * Palet PT Sinar Atap Mandiri: teal tua sebagai warna struktur, kuning "sinar"
+ * sebagai satu-satunya aksen, di atas kanvas putih hangat. Sengaja dijauhkan
+ * dari navy-coklat Buana Kanopi dan biru-lime Novora.
+ */
+@theme {
+  --color-ink: #13201d;
+  --color-ink-soft: #24332f;
+  --color-muted: #5b6964;
+  --color-canvas: #f5f3ed;
+  --color-paper: #fbfaf7;
+  --color-line: #e2ded3;
+  --color-brand: #0f5c53;
+  --color-brand-dark: #0a3f39;
+  --color-brand-soft: #d5e8e2;
+  --color-sun: #f5b43a;
+  --color-sun-soft: #fbe8c0;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  letter-spacing: -0.011em;
+}
+
+/*
+ * Tombol pill + lingkaran panah (pola dari Novora). Pill berganti ke warna
+ * lingkaran saat hover sementara lingkarannya memudar, jadi yang tersisa
+ * hanya panah yang berputar dari timur laut ke timur. Warna dikirim lewat
+ * custom property karena tombol ini dipakai dengan pasangan warna berbeda
+ * di tiap section.
+ */
+.arrow-btn {
+  background-color: var(--btn-bg);
+  transition: background-color 300ms ease, color 300ms ease, transform 300ms ease;
+}
+
+.arrow-btn:hover {
+  background-color: var(--btn-accent);
+}
+
+.arrow-btn-circle {
+  background-color: var(--btn-accent);
+  transition: background-color 300ms ease;
+}
+
+.arrow-btn:hover .arrow-btn-circle {
+  background-color: transparent;
+}
+
+.arrow-btn-icon {
+  transition: transform 300ms ease;
+}
+
+.arrow-btn:hover .arrow-btn-icon {
+  transform: rotate(45deg);
+}
+
+/*
+ * Muncul saat di-scroll. Dikendalikan komponen <Reveal>, yang menyalakan
+ * data-visible sekali ketika elemen masuk layar.
+ */
+.reveal {
+  opacity: 0;
+  translate: 0 28px;
+  transition:
+    opacity 800ms var(--ease-out-expo),
+    translate 800ms var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}
+
+/*
+ * Marquee: dua salinan isi berjajar dan track bergeser tepat setengah
+ * lebarnya, sehingga salinan kedua mendarat persis di posisi salinan pertama.
+ * Jarak antar-item ada di tiap run (bukan di track), kalau tidak setengah
+ * lebar track tidak lagi sama dengan satu run dan loop-nya meloncat.
+ */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 60s) linear infinite;
+}
+
+.marquee-track[data-reverse="true"] {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-run {
+  display: flex;
+  align-items: center;
+  gap: var(--marquee-gap, 1rem);
+  padding-right: var(--marquee-gap, 1rem);
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/*
+ * Carousel foto 3D di hero: foto-foto menempel di dinding silinder tak
+ * terlihat (--arc-r = jari-jarinya) dengan sumbu vertikal, lalu silinder
+ * diputar pada sumbu Y di depan kamera berperspektif. Foto di depan tampil
+ * besar menghadap kita, foto di samping mengecil dan berbelok menjauh.
+ *
+ * Kamera melihat dari bawah (--arc-po jauh di bawah titik tengah foto), jadi
+ * foto yang menjauh turun ke arah horizon dan kipasnya melengkung ke bawah.
+ *
+ * Hero memasang 7 foto x 4 putaran = 28 slot merata di 360°. Roda berputar
+ * tepat satu set foto per siklus (90°), sehingga tiap slot mendarat di
+ * tetangga dengan foto yang sama dan titik loop-nya tak terlihat.
+ *
+ * Di bawah 480px hanya bagian paling depan silinder yang terlihat, jadi
+ * kipasnya terlihat datar. Solusinya jari-jari yang jauh lebih kecil, yang
+ * butuh jarak sudut lebih lebar agar foto tidak bertabrakan: tiap slot kedua
+ * disembunyikan (14 slot), dan karena jumlah fotonya ganjil, loop 180° tetap
+ * menampilkan ketujuh foto.
+ *
+ * Fotonya potret (4:5), lebih tinggi dari kartu persegi Novora, jadi --arc-top
+ * dan tinggi wadah di Hero.tsx ikut dinaikkan; selisih --arc-po terhadap
+ * --arc-top dipertahankan agar lengkungan kipasnya sama.
+ */
+.arc {
+  --arc-p: 560px;
+  --arc-r: 420px;
+  --arc-top: 108px;
+  --arc-po: 313px;
+  --arc-card-w: 150px;
+  --arc-loop: 180deg;
+
+  perspective: var(--arc-p);
+  perspective-origin: 50% var(--arc-po);
+  /* Di layar lebar kipasnya berakhir sebelum tepi layar; ujungnya dipudarkan
+     supaya foto yang hampir tegak lurus tidak tampak terpotong. */
+  mask-image: linear-gradient(to right, transparent 2%, #000 14%, #000 86%, transparent 98%);
+}
+
+.arc-slot:nth-child(even) {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .arc {
+    --arc-p: 1130px;
+    --arc-r: 800px;
+    --arc-top: 114px;
+    --arc-po: 326px;
+    --arc-card-w: 155px;
+    --arc-loop: 90deg;
+  }
+
+  .arc-slot:nth-child(even) {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .arc {
+    --arc-p: 1600px;
+    --arc-r: 900px;
+    --arc-top: 120px;
+    --arc-po: 426px;
+    --arc-card-w: 160px;
+  }
+}
+
+.arc-wheel {
+  position: absolute;
+  left: 50%;
+  top: var(--arc-top);
+  height: 0;
+  width: 0;
+  transform-style: preserve-3d;
+  animation: arc-spin 14s linear infinite;
+}
+
+.arc:hover .arc-wheel {
+  animation-play-state: paused;
+}
+
+/*
+ * translateZ di depan menarik roda mundur sejauh jari-jarinya, jadi foto
+ * terdepan jatuh di z = 0 dan tampil di ukuran aslinya (tidak diperbesar
+ * sehingga tidak buram).
+ */
+@keyframes arc-spin {
+  from {
+    transform: translateZ(calc(var(--arc-r) * -1)) rotateY(0deg);
+  }
+  to {
+    transform: translateZ(calc(var(--arc-r) * -1)) rotateY(calc(var(--arc-loop) * -1));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arc-wheel {
+    animation: none;
+  }
+}
+
+.arc-slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--arc-card-w);
+  aspect-ratio: 4 / 5;
+  margin-left: calc(var(--arc-card-w) / -2);
+  margin-top: calc(var(--arc-card-w) * -0.625);
+  /* Menyembunyikan foto yang sedang lewat di sisi belakang silinder. */
+  backface-visibility: hidden;
+}
