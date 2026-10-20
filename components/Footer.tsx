@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Script from "next/script";
-import { Clock, Mail, MapPin } from "lucide-react";
+import { Clock, Download, Mail, MapPin } from "lucide-react";
 import Logo from "./Logo";
 import WhatsAppIcon from "./WhatsAppIcon";
 import { mapsLink, navLinks, site, waLink } from "@/lib/site";
-import { services } from "@/lib/services";
+import { sarnafil, services } from "@/lib/services";
 
 function ContactRow({
   icon,
@@ -36,6 +36,14 @@ export default function Footer() {
           <div>
             <Logo variant="light" />
             <p className="mt-5 max-w-xs text-sm leading-6 text-white/50">{site.description}</p>
+            <a
+              href={site.companyProfile.href}
+              download={site.companyProfile.fileName}
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-sun hover:bg-sun hover:text-ink"
+            >
+              <Download size={15} />
+              Company Profile (PDF)
+            </a>
           </div>
 
           <div>
@@ -61,6 +69,11 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href={`/layanan#${sarnafil.id}`} className="transition-colors hover:text-white">
+                  {sarnafil.title}
+                </Link>
+              </li>
               <li>
                 <Link href="/layanan#material" className="transition-colors hover:text-white">
                   Pilihan Material

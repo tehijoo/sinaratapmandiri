@@ -1,7 +1,7 @@
 "use client";
 
 import { Send } from "lucide-react";
-import { services } from "@/lib/services";
+import { sarnafil, services } from "@/lib/services";
 import { site, waLink } from "@/lib/site";
 
 const field =
@@ -16,7 +16,7 @@ export default function ContactForm() {
     const optional = (label: string, name: string) => (value(name) ? [`${label}: ${value(name)}`] : []);
 
     const lines = [
-      `Halo ${site.name}, saya ingin konsultasi kanopi membrane.`,
+      `Halo ${site.name}, saya ingin konsultasi.`,
       "",
       `Nama: ${value("nama")}`,
       `No. HP: ${value("telepon")}`,
@@ -67,6 +67,7 @@ export default function ContactForm() {
                 {service.title}
               </option>
             ))}
+            <option value={sarnafil.title}>{sarnafil.title}</option>
             <option value="Lainnya">Lainnya</option>
           </select>
         </label>

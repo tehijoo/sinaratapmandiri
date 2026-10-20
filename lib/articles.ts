@@ -25,7 +25,7 @@ export const articles: Article[] = [
       "Kanopi membrane makin sering dipakai di rumah, masjid, hingga gedung kantor. Apa sebenarnya bahan ini, dan apa bedanya dengan atap kanopi biasa?",
     date: "2026-10-12",
     readMinutes: 4,
-    cover: getPhoto("21"),
+    cover: getPhoto("payung-membrane"),
     body: [
       {
         type: "p",
@@ -89,7 +89,7 @@ export const articles: Article[] = [
       "Harga murah belum tentu hemat. Lima hal ini membantu Anda menilai apakah penyedia jasa kanopi membrane benar-benar bisa dipercaya.",
     date: "2026-09-28",
     readMinutes: 3,
-    cover: getPhoto("19"),
+    cover: getPhoto("pemasangan-membrane"),
     body: [
       {
         type: "p",
@@ -133,7 +133,7 @@ export const articles: Article[] = [
       "Halaman masjid dan sekolah butuh area teduh yang luas dan aman untuk banyak orang. Ini pertimbangan utama sebelum memasang kanopi membrane.",
     date: "2026-09-14",
     readMinutes: 3,
-    cover: getPhoto("7"),
+    cover: getPhoto("masjid"),
     body: [
       {
         type: "p",

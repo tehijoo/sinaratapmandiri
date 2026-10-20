@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Eye, Handshake, ShieldCheck, Target } from "lucide-react";
+import { BadgeCheck, Download, Eye, Handshake, ShieldCheck, Target } from "lucide-react";
 import CtaBanner from "@/components/CtaBanner";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
@@ -10,13 +10,16 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Tentang Kami",
-  description: `Kenali ${site.name}, penyedia jasa desain dan pemasangan kanopi membrane untuk hunian, fasilitas publik, dan gedung instansi.`,
+  description: `${site.name} adalah perusahaan tensile membrane structures asal Depok yang berdiri sejak 2022, spesialis tenda membrane dan Sarnafil.`,
 };
 
 /*
- * TODO: profil, nilai, serta visi & misi di halaman ini masih teks contoh.
- * Sesuaikan dengan profil resmi PT Sinar Atap Mandiri (tahun berdiri,
- * legalitas, pengalaman proyek, dan sebagainya).
+ * Profil, visi & misi, dan legalitas diambil dari company profile PT Sinar
+ * Atap Mandiri (site.companyProfile, bisa diunduh dari halaman ini). NPWP
+ * sengaja tidak ditulis di halaman, meski tercantum di PDF-nya.
+ *
+ * TODO: tiga nilai di bawah masih teks contoh; sesuaikan bila klien punya
+ * versinya sendiri.
  */
 const values = [
   {
@@ -37,13 +40,20 @@ const values = [
 ];
 
 const missions = [
-  "Menyediakan kanopi membrane dengan material dan rangka yang sesuai standar keamanan.",
-  "Memberi pelayanan yang jelas dan transparan sejak konsultasi hingga serah terima.",
-  "Bekerja tepat waktu dengan memperhatikan keselamatan dan kerapian di lokasi.",
+  "Menjadi mitra yang efisien dan efektif bagi setiap klien.",
+  "Senantiasa meningkatkan kualitas pelayanan.",
+  "Berkomitmen tinggi untuk kepuasan seluruh klien kami.",
+];
+
+const legal = [
+  { label: "Sertifikat Pendirian PT (Kemenkumham)", value: "AHU-009960.AH.01.30. Tahun 2024" },
+  { label: "Nomor Induk Berusaha (NIB)", value: "2102240229901" },
+  { label: "Sertifikat Standar", value: "16122300004950001" },
+  { label: "Standar Nasional Indonesia (SNI)", value: "031583-1989 (Bina UMK)" },
 ];
 
 export default function TentangKamiPage() {
-  const photo = getPhoto("21");
+  const photo = getPhoto("fasad-gedung");
 
   return (
     <>
@@ -54,7 +64,7 @@ export default function TentangKamiPage() {
             Membangun peneduh yang <span>kokoh dan indah</span>
           </>
         }
-        description={`${site.name} merancang dan memasang kanopi membrane untuk rumah, fasilitas publik, hingga gedung instansi.`}
+        description={`${site.name} adalah spesialis tenda membrane dan Sarnafil yang berdiri di Depok sejak 2022.`}
       />
 
       <section className="pb-20 lg:pb-24">
@@ -70,23 +80,32 @@ export default function TentangKamiPage() {
             />
             <div className="mt-6 space-y-4 text-base leading-7 text-muted">
               <p>
-                <strong className="font-semibold text-ink">{site.name}</strong> adalah penyedia jasa desain dan pemasangan
-                kanopi membrane. Kami menangani pekerjaan dari survei dan pengukuran, perancangan bentuk, produksi rangka
-                baja dan membrane, hingga pemasangan di lokasi.
+                <strong className="font-semibold text-ink">{site.name}</strong> adalah perusahaan berbadan hukum perseroan
+                terbatas yang didirikan di Depok pada tahun 2022 dan bergerak di bidang tensile membrane structures: tenda
+                dan kanopi membrane, serta pelapisan atap dengan membrane Sarnafil.
               </p>
               <p>
-                Kami melayani pemilik rumah yang membutuhkan carport atau teras, pengelola masjid dan sekolah, hingga
-                perusahaan dan instansi pemerintah. Setiap proyek, besar maupun kecil, dikerjakan dengan perhitungan yang
-                sama telitinya.
+                Kami berdiri karena melihat potensi pasar yang semakin kuat dan perkembangan teknologi yang pesat.
+                Dijalankan oleh tenaga ahli muda yang profesional di bidangnya dan didukung peralatan yang memadai, kami
+                berkomitmen memberi hasil yang optimal. Fokus utama kami adalah kepuasan klien.
               </p>
             </div>
             <ul className="mt-8 flex flex-wrap gap-2">
-              {["Survei & pengukuran", "Desain custom", "Produksi rangka", "Pemasangan"].map((item) => (
+              {["Berdiri sejak 2022", "Depok, Jawa Barat", "Tenda & kanopi membrane", "Sarnafil"].map((item) => (
                 <li key={item} className="rounded-full bg-paper px-4 py-2 text-sm font-medium text-ink-soft ring-1 ring-line">
                   {item}
                 </li>
               ))}
             </ul>
+            <a
+              href={site.companyProfile.href}
+              download={site.companyProfile.fileName}
+              className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand/25 transition-colors hover:bg-ink"
+            >
+              <Download size={17} />
+              Unduh Company Profile
+              <span className="font-normal text-white/70">(PDF, {site.companyProfile.size})</span>
+            </a>
           </Reveal>
 
           <Reveal delay={100}>
@@ -135,7 +154,7 @@ export default function TentangKamiPage() {
         </div>
       </section>
 
-      <section className="pb-4">
+      <section className="pb-20 lg:pb-24">
         <div className="mx-auto grid max-w-6xl gap-4 px-6 lg:grid-cols-2 lg:px-8">
           <Reveal className="h-full">
             <article className="flex h-full flex-col rounded-[32px] bg-ink p-10 text-white">
@@ -144,8 +163,7 @@ export default function TentangKamiPage() {
               </span>
               <h2 className="mt-6 text-2xl font-bold tracking-[-0.03em]">Visi</h2>
               <p className="mt-3 text-base leading-7 text-white/65">
-                Menjadi mitra terpercaya dalam pengadaan dan pemasangan kanopi membrane yang aman, estetis, dan tahan lama
-                di Indonesia.
+                Menjadi perusahaan terkemuka yang mengedepankan inovasi, solusi, dan kompetensi.
               </p>
             </article>
           </Reveal>
@@ -165,6 +183,32 @@ export default function TentangKamiPage() {
               </ol>
             </article>
           </Reveal>
+        </div>
+      </section>
+
+      <section id="legalitas" className="scroll-mt-28 pb-4">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <Reveal>
+            <SectionHeading
+              title={
+                <>
+                  <strong>Legalitas</strong> perusahaan
+                </>
+              }
+              description={`${site.name} terdaftar resmi dan memiliki izin usaha yang lengkap.`}
+            />
+          </Reveal>
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {legal.map((item, i) => (
+              <li key={item.label}>
+                <Reveal delay={i * 70} className="h-full rounded-3xl bg-paper p-6 ring-1 ring-line/80">
+                  <BadgeCheck size={24} className="text-brand" />
+                  <p className="mt-4 text-sm font-medium leading-6 text-muted">{item.label}</p>
+                  <p className="mt-1 break-words font-bold tracking-[-0.01em] text-ink">{item.value}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

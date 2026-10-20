@@ -5,7 +5,7 @@ import Backdrop from "../Backdrop";
 import Eyebrow from "../Eyebrow";
 import { heroPhotos } from "@/lib/photos";
 import { services } from "@/lib/services";
-import { waLink } from "@/lib/site";
+import { site, waLink } from "@/lib/site";
 
 /**
  * Berapa kali set foto diulang mengelilingi silinder. Di bawah 480px
@@ -67,7 +67,9 @@ export default function Hero() {
       <Backdrop />
 
       <div className="relative mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 pt-24 pb-4 text-center min-[480px]:pt-28 lg:px-8 lg:pt-32 lg:pb-6">
-        <Eyebrow>PT Sinar Atap Mandiri · Spesialis Kanopi Membrane</Eyebrow>
+        <Eyebrow>
+          {site.name} · {site.tagline}
+        </Eyebrow>
 
         <h1 className="mt-5 text-balance text-[29px] font-extrabold leading-[1.08] tracking-[-0.04em] text-ink min-[480px]:text-4xl sm:text-5xl lg:text-[3.4rem]">
           Kanopi Membrane yang Kokoh,{" "}

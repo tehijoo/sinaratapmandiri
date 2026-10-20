@@ -16,9 +16,9 @@ Semua data yang masih contoh ditandai `TODO` di kode (`grep -rn TODO app compone
 | Apa | Di mana |
 |---|---|
 | Jam operasional, area layanan, domain (nomor WA/telepon, email, dan alamat sudah asli) | `lib/site.ts` |
-| Foto proyek (masih foto pinjaman, **wajib diganti**) | `public/images/` + daftar di `lib/photos.ts` |
+| Foto proyek Sarnafil (belum ada; foto kanopi sudah dari company profile klien) | `public/images/proyek/` + daftar di `lib/photos.ts` |
 | Logo (masih logo sementara) | `components/Logo.tsx`, `app/icon.tsx` |
-| Profil, nilai, visi & misi | `app/tentang-kami/page.tsx` |
+| Tiga "nilai perusahaan" (profil, visi-misi, dan legalitas sudah dari company profile) | `app/tentang-kami/page.tsx` |
 | Jenis material yang benar-benar disediakan | `materials` di `lib/services.ts` |
 | Artikel | `lib/articles.ts` |
 

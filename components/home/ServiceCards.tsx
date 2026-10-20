@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Droplets } from "lucide-react";
 import ArrowButton from "../ArrowButton";
 import Reveal from "../Reveal";
 import SectionHeading from "../SectionHeading";
-import { services } from "@/lib/services";
+import { sarnafil, services } from "@/lib/services";
 import { waLink } from "@/lib/site";
 
 /*
@@ -102,6 +103,28 @@ export default function ServiceCards() {
             );
           })}
         </div>
+
+        {/* Layanan non-kanopi dari company profile, cukup diperkenalkan singkat di beranda. */}
+        <Reveal>
+          <Link
+            href={`/layanan#${sarnafil.id}`}
+            className="group mt-5 flex flex-col gap-4 rounded-[28px] bg-paper/70 p-6 ring-1 ring-inset ring-line transition-colors hover:bg-paper sm:flex-row sm:items-center sm:justify-between lg:px-8"
+          >
+            <span className="flex items-center gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand text-sun">
+                <Droplets size={22} />
+              </span>
+              <span>
+                <span className="block text-lg font-bold tracking-[-0.02em] text-ink">{sarnafil.title}</span>
+                <span className="block text-[15px] leading-6 text-muted">{sarnafil.summary}</span>
+              </span>
+            </span>
+            <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-brand">
+              Selengkapnya
+              <ArrowUpRight size={16} className="transition-transform group-hover:rotate-45" />
+            </span>
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

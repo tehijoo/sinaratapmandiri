@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Check } from "lucide-react";
+import { Check, Droplets } from "lucide-react";
 import ArrowButton from "@/components/ArrowButton";
 import CtaBanner from "@/components/CtaBanner";
 import PageHeader from "@/components/PageHeader";
 import Process from "@/components/Process";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import { materials, services } from "@/lib/services";
+import { materials, sarnafil, services } from "@/lib/services";
 import { site, waLink } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Layanan Kanopi Membrane",
-  description: `Jasa desain dan pemasangan kanopi membrane dari ${site.name} untuk hunian & carport, fasilitas publik, serta gedung komersial dan instansi.`,
+  title: "Layanan Tenda Membrane & Sarnafil",
+  description: `Jasa desain dan pemasangan tenda & kanopi membrane dari ${site.name} untuk hunian, fasilitas publik, serta gedung komersial dan instansi, plus waterproofing atap dengan membrane Sarnafil.`,
 };
 
 export default function LayananPage() {
@@ -25,7 +25,7 @@ export default function LayananPage() {
             Kanopi membrane untuk <span>setiap kebutuhan</span>
           </>
         }
-        description="Tiga kelompok layanan dengan satu standar pengerjaan: diukur langsung, dirancang sesuai bangunan, dan dipasang oleh tim kami sendiri."
+        description="Tenda dan kanopi membrane untuk tiga kelompok kebutuhan, ditambah pelapisan atap dengan membrane Sarnafil. Semuanya diukur langsung, dirancang sesuai bangunan, dan dipasang oleh tim kami sendiri."
       />
 
       <div className="space-y-6 pb-8">
@@ -87,6 +87,44 @@ export default function LayananPage() {
           );
         })}
       </div>
+
+      <section id={sarnafil.id} className="scroll-mt-28 px-6 pt-14 lg:px-8 lg:pt-20">
+        <Reveal className="mx-auto grid max-w-6xl gap-10 rounded-[32px] bg-brand p-8 text-white sm:p-12 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sun">
+              Layanan {String(services.length + 1).padStart(2, "0")}
+            </p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.035em] lg:text-4xl">{sarnafil.title}</h2>
+            <p className="mt-4 text-base font-medium leading-7 text-white/90">{sarnafil.summary}</p>
+            <div className="mt-4 space-y-3 text-[15px] leading-7 text-white/70">
+              {sarnafil.details.map((detail) => (
+                <p key={detail}>{detail}</p>
+              ))}
+            </div>
+            <div className="mt-8">
+              <ArrowButton
+                href={waLink(`Halo ${site.name}, saya ingin konsultasi waterproofing atap dengan Sarnafil.`)}
+                external
+                bg="#f5b43a"
+                accent="#13201d"
+                text="text-ink hover:text-white"
+                className="shadow-lg shadow-black/20"
+              >
+                Konsultasi Sarnafil
+              </ArrowButton>
+            </div>
+          </div>
+
+          <ul className="grid grid-cols-2 gap-3">
+            {sarnafil.uses.map((use) => (
+              <li key={use} className="flex flex-col gap-4 rounded-2xl bg-white/10 p-5 ring-1 ring-inset ring-white/15">
+                <Droplets size={22} className="text-sun" />
+                <span className="font-semibold leading-snug">{use}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </section>
 
       <section id="material" className="scroll-mt-28 py-20 lg:py-24">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">

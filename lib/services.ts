@@ -20,7 +20,7 @@ export const services: Service[] = [
       "Warna membrane bisa disesuaikan dengan cat dan fasad rumah, dan bentuknya dibuat mengikuti lebar lahan yang tersedia.",
     ],
     uses: ["Carport", "Teras", "Balkon", "Rooftop", "Taman"],
-    photo: getPhoto("17"),
+    photo: getPhoto("carport"),
   },
   {
     id: "fasilitas-publik",
@@ -32,7 +32,7 @@ export const services: Service[] = [
       "Rangka dan titik tiang dirancang aman untuk area yang ramai dilalui, termasuk anak-anak, dan aliran air hujan diarahkan agar tidak menggenang.",
     ],
     uses: ["Masjid", "Sekolah", "Taman", "Lapangan", "Ruang Tunggu"],
-    photo: getPhoto("13"),
+    photo: getPhoto("area-manasik"),
   },
   {
     id: "komersial",
@@ -44,9 +44,26 @@ export const services: Service[] = [
       "Kami terbiasa bekerja dengan jadwal, gambar kerja, dan dokumen pengadaan untuk proyek korporasi maupun instansi.",
     ],
     uses: ["Area Parkir", "Drop-off", "Food Court", "Gerbang", "Gedung Kantor"],
-    photo: getPhoto("9"),
+    photo: getPhoto("gerbang-parkir"),
   },
 ];
+
+/*
+ * Layanan kedua di company profile ("Spesialis Tenda Membrane & Sarnafil").
+ * Dipisah dari daftar di atas karena bukan kanopi, melainkan pelapis atap.
+ * TODO: minta foto proyek Sarnafil ke klien untuk melengkapi halaman Layanan.
+ */
+export const sarnafil = {
+  id: "sarnafil",
+  title: "Atap & Waterproofing Sarnafil",
+  summary:
+    "Pelapisan atap datar dan dak beton dengan membrane Sarnafil supaya kedap air, tahan sinar matahari, dan awet.",
+  details: [
+    "Sarnafil adalah membrane atap berupa lembaran sintetis yang dipasang menutup seluruh permukaan atap. Sambungan antarlembar dilas panas sehingga tidak menyisakan celah bagi air.",
+    "Solusi untuk dak beton yang sering rembes atau bocor, rooftop, dan atap datar gedung yang perlu perlindungan jangka panjang.",
+  ],
+  uses: ["Dak beton", "Rooftop", "Atap datar gedung", "Talang & kanopi beton"],
+};
 
 /*
  * Ringkasan umum kelas material membrane yang lazim di pasaran. Sesuaikan
